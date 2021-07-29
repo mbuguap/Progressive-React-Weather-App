@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import {
+  Container,
+  Card,
+  InputGroup,
+  FormControl,
+  Badge,
+} from 'react-bootstrap';
+import { fetchWeather } from './api';
 
-function App() {
+const App = () => {
+  const [query, setQuery] = useState('');
+  const [weather, setWeather] = useState({});
+
+  const search = async (e) => {
+    if (e.key === 'Enter') {
+      const data = await fetchWeather(query);
+
+      setWeather(data);
+      setQuery('');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className='py-5'>
+      <Card>
+        <InputGroup className='mb-3'>
+          <FormControl
+            className='m-3'
+            placeholder='Search...'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyPress={search}
+          />
+        </InputGroup>
+
+        {weather.main && (
+          <Card.Body className='text-center'>
+            <Card.Title>
+              <span>{weather.name}</span>
+              <sup>
+                {' '}
+                <Badge bg='danger'>{weather.sys.country}</Badge>{' '}
+              </sup>
+            </Card.Title>
+            <Card.Title>
+              {Math.round(weather.main.temp)}
+              <sup>&deg;C</sup>
+            </Card.Title>
+            <Card.Text>
+              <img
+                src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                alt={weather.weather[0].description}
+              />
+              <p className='lead'>{weather.weather[0].description}</p>
+            </Card.Text>
+          </Card.Body>
+        )}
+      </Card>
+    </Container>
   );
-}
+};
 
 export default App;
