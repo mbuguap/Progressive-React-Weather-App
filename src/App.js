@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <Container className='py-5'>
-      <h1 className='display-5 mb-3'>Weather PWA App</h1>
+      <h1 className='display-5 mb-3'>Weather Progressive Web App</h1>
       <p className='lead'>Built Using React, Bootstrap & OpenWeatherMap API</p>
       <Card>
         <InputGroup className='mb-3'>
