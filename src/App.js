@@ -29,7 +29,7 @@ const App = () => {
         <InputGroup className='mb-3'>
           <FormControl
             className='m-3'
-            placeholder='Search City and Enter...'
+            placeholder='Type City and Enter...'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={search}
