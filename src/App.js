@@ -23,11 +23,13 @@ const App = () => {
 
   return (
     <Container className='py-5'>
+      <h1 className='display-5 mb-3'>Weather PWA App</h1>
+      <p className='lead'>Built Using React, Bootstrap & OpenWeatherMap API</p>
       <Card>
         <InputGroup className='mb-3'>
           <FormControl
             className='m-3'
-            placeholder='Search...'
+            placeholder='Search City and Enter...'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={search}
